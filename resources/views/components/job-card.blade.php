@@ -1,5 +1,5 @@
 <x-card class="mb-4">
-    <div class="flex justify-between">
+    <div class="mb-4 flex justify-between">
         <h2 class="text-lg font-medium">
             {{ $job->title }}
         </h2>
@@ -18,13 +18,6 @@
             <x-tag class="rounded-md border px-2 py-1">{{ $job->category }}</x-tag>
         </div>
     </div>
-
-    <p class="text-sm text-slate-500 mb-4">
-        {{-- "e" Escapes any HTML special characters (<, >, &, etc.) --}}
-        {{-- nl2br Converts (\n) in the text to <br> --}}
-        {{-- e() already escapes it safely, use {!! !!} --}}
-        {!! nl2br(e($job->description)) !!}
-    </p>
 
     {{ $slot }}
 
