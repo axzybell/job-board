@@ -1,3 +1,7 @@
+@php
+    use App\Models\Job;
+@endphp
+
 <x-layout>
     <x-breadcrumbs class="mb-4"
         :links="['Jobs' => route('jobs.index')]" />
@@ -16,8 +20,21 @@
                         <x-text-input name="max_salary" value="{{ request('max_salary') }}" placeholder="To" />
                     </div>
                 </div>
-                <div>3</div>
-                <div>4</div>
+                <div>
+                    <div class="mb-1 font-semibold">Experience</div>
+                    <x-radio-group name="experience"
+                        :options="array_combine(
+                            //key, first letter uppercase
+                            array_map('ucfirst', Job::$experience),
+                            //value
+                            Job::$experience
+                        )" />
+                </div>
+                <div>
+                    <div class="mb-1 font-semibold">Category</div>
+                    <x-radio-group name="category"
+                        :options="Job::$category" />
+                </div>
             </div>
 
             <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200">Filter</button>
