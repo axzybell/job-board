@@ -15,6 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        User::factory()->create([
+            'name' => 'Test',
+            'email' => 'test@gmail.com'
+        ]);
+
         User::factory(300)->create();
 
         //not all the user must have employer
