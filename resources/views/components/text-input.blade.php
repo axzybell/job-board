@@ -1,5 +1,5 @@
 <div class="relative">
-    @if ('textarea' != $type)
+    @if ($type != 'textarea')
         @if ($formRef)
             <button type="submit" class="absolute top-0 right-0 flex h-full items-center pr-2"
                 x-on:click="$refs['input-{{ $name }}'].value = ''; $refs=['{{$formRef}}'].submit()">
@@ -9,16 +9,25 @@
                 </svg>
             </button>
         @endif
-
-        <input x-ref="input-{{ $name }}" type="{{ $type }}" placeholder="{{ $placeholder }}"
-            name="{{ $name }}" value="{{ old($name, $value) }}" id="{{ $name }}"
-            @class([
-                'w-full rounded-md border-0 py-1.5 px-2.5 text-sm ring-1 placeholder:text-slate-400 focus:ring-2',
-                'pr-8' => $formRef,
-                'ring-slate-300' => !$errors->has($name),
-                'ring-red-300' => $errors->has($name)
-            ])
-        />
+            <input x-ref="input-{{ $name }}" type="{{ $type }}" placeholder="{{ $placeholder }}"
+                name="{{ $name }}" value="{{ old($name, $value) }}" id="{{ $name }}"
+                @class( $type == 'file' ?
+                [
+                    'block w-full text-sm text-gray-500
+                    file:mr-4 file:py-2 file:px-4
+                    file:rounded-full file:border-0
+                    file:text-sm file:font-semibold
+                    file:bg-blue-50 file:text-blue-700
+                    hover:file:bg-blue-100'
+                ]
+                :
+                [
+                    'w-full rounded-md border-0 py-1.5 px-2.5 text-sm ring-1 placeholder:text-slate-400 focus:ring-2',
+                    'pr-8' => $formRef,
+                    'ring-slate-300' => !$errors->has($name),
+                    'ring-red-300' => $errors->has($name)
+                ])
+            />
     @else
         <textarea id="{{ $name }}" name="{{ $name }}"
             @class([
