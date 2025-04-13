@@ -24,6 +24,12 @@
                         |
                     </li>
                     <li>
+                        <a href="{{ route('my-jobs.index') }}">My Jobs</a>
+                    </li>
+                    <li class="px-2 text-gray-900">
+                        |
+                    </li>
+                    <li>
                         <form action="{{ route('auth.destroy') }}" method="POST">
                             @csrf
                             @method('DELETE')
